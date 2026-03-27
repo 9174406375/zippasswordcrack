@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: zipcracker
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn -w 2 --timeout 300 -b 0.0.0.0:$PORT crackpro:app
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATA_DIR
+        value: /tmp/zipcracker
